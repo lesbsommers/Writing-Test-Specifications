@@ -86,3 +86,91 @@ Purpose: To check if the function can handle mixed data types and exclude non-in
 Input: Two arrays of different lengths, for example, [1, 3, 5] and [9, 7].
 Expected Output: A merged, sorted array of odd numbers (e.g., [1, 3, 5, 7, 9]).
 Purpose: To test that the function can handle arrays of different sizes and still return the correct result.
+
+**Functional Tests:**
+1. A shopping cart checkout feature that allows a user to check out as a guest (without an account), or as a logged-in user. They should be allowed to do either, but should be asked if they want to create an account or log in if they check out as a guest.
+
+_Assumptions:_
+**Guest Checkout:**
+If a user selects guest checkout, they will be prompted to either log in or create an account after entering their details (such as shipping and billing information).
+**Logged-in User Checkout:**
+If the user is already logged in, the checkout process will proceed without asking them to log in again.
+**Empty Cart:**
+If the shopping cart is empty, the system should prevent the checkout process and display a message like "Your cart is empty. Please add items to your cart before proceeding."
+**User Feedback During Checkout:**
+The system should provide feedback to the user at each step of the checkout process, including:
+An initial cart summary with items listed.
+A payment method section (credit card, PayPal, etc.).
+A shipping information section (address, shipping method).
+A final confirmation before submitting the order.
+**Test Input:**
+A user with an empty shopping cart, attempting to check out as both a guest and a logged-in user.
+
+_Test Scenario 1: Guest Checkout with Items in the Cart_
+**Test Steps:**
+Add items to the shopping cart (e.g., two items worth $20 and $30).
+Proceed to checkout as a guest.
+The system should display a message asking the user to log in or create an account (e.g., "Would you like to log in or create an account to save your information for future purchases?").
+Select "Proceed as Guest" and enter the required shipping and billing information.
+The system should then show a summary of the order, including the items in the cart, total price, shipping details, and payment options.
+After reviewing the order, the system should ask for confirmation before finalizing the purchase.
+Expected Behavior:
+If the cart is not empty, the user should be able to proceed with checkout after entering shipping and payment information.
+The system should not prompt for login if the user chooses to continue as a guest, but should still allow the option to create an account.
+Expected Output:
+The system allows the guest user to proceed with checkout without an account, while prompting them to create an account after completing the purchase.
+
+_Test Scenario 2: Logged-in User Checkout_
+**Test Steps:**
+Log in to the system with a registered account.
+Add items to the shopping cart (e.g., two items worth $50 and $25).
+Proceed to checkout as a logged-in user.
+The system should skip the account creation/login prompt, as the user is already logged in.
+The user should enter their shipping and payment details and review the order.
+The system should allow the user to confirm the purchase and proceed with checkout.
+Expected Behavior:
+The user is already logged in, so no prompts to log in or create an account should appear.
+The checkout process should proceed smoothly, with the user able to enter shipping details, review the order, and confirm the purchase.
+Expected Output:
+The system should successfully complete the order for the logged-in user and provide an order confirmation message or email.
+
+_Test Scenario 3: Empty Cart Checkout_
+**Test Steps:**
+Ensure the cart is empty (no items in the cart).
+Attempt to proceed to checkout.
+The system should display a warning message (e.g., "Your cart is empty. Please add items to your cart before proceeding.") and prevent further action.
+The user should be redirected to the shopping page to add items to their cart.
+Expected Behavior:
+The checkout process should be blocked if the cart is empty, and an appropriate message should be shown.
+The user should not be able to proceed with an empty cart.
+Expected Output:
+A clear message like "Your cart is empty. Please add items to your cart before proceeding" is displayed.
+
+_Test Scenario 4: No Payment Method Entered_
+**Test Steps:**
+Add items to the shopping cart and proceed to checkout as either a guest or logged-in user.
+The user should be prompted to select or enter a payment method (e.g., credit card, PayPal).
+If the user does not provide any payment method and tries to confirm the checkout, the system should display a warning message (e.g., "Please provide a payment method before completing your order").
+Expected Behavior:
+The system should require a valid payment method before allowing the user to complete the purchase.
+The user should be prompted again to enter the payment information if none is provided.
+Expected Output:
+The system prompts for payment details if none are provided and blocks the checkout until a valid payment method is entered.
+
+_Test Scenario 5: Returning to Cart After Checkout_
+**Test Steps:**
+Add items to the shopping cart and proceed to checkout as either a guest or logged-in user.
+After reaching the final step of checkout (order confirmation), the user may decide to return to the cart to modify their order (e.g., remove an item).
+The system should allow the user to go back to the cart and make changes before completing the order.
+Expected Behavior:
+The user should be able to return to the cart and modify the order before finalizing the purchase.
+The checkout process should be non-disruptive, allowing users to edit items in the cart before proceeding.
+Expected Output:
+The cart updates appropriately, and the user can modify their order before completing the purchase.
+
+_Test Behavior Missing in the Prompt:_
+Handling of Invalid Shipping or Billing Information: The system should validate user inputs for shipping and payment details (e.g., missing address, invalid credit card number) and provide appropriate error messages.
+User Session Timeout: If a logged-in user remains idle for a certain period, the system should time out and prompt the user to log in again before proceeding to checkout.
+Outcome:
+The test will pass if the system behaves as described in each scenario.
+The test will fail if any of the expected behaviors are not met (e.g., if the cart allows checkout when empty, or if the system doesn't allow modifying the cart before finalizing the order).
